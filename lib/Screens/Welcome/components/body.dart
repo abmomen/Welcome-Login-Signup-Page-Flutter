@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Login/login_screen.dart';
-import 'package:flutter_auth/Screens/Signup/signup_screen.dart';
-import 'package:flutter_auth/Screens/Welcome/components/background.dart';
-import 'package:flutter_auth/components/rounded_button.dart';
-import 'package:flutter_auth/constants.dart';
+import 'package:swipe_words/Screens/Login/login_screen.dart';
+import 'package:swipe_words/Screens/Signup/signup_screen.dart';
+import 'package:swipe_words/Screens/Welcome/components/background.dart';
+import 'package:swipe_words/components/rounded_button.dart';
+import 'package:swipe_words/constants.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Body extends StatelessWidget {
@@ -17,7 +17,7 @@ class Body extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "WELCOME TO EDU",
+              "WELCOME TO EDUBD",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(height: size.height * 0.05),
