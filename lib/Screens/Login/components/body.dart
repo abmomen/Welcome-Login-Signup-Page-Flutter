@@ -6,6 +6,7 @@ import 'package:swipe_words/components/rounded_button.dart';
 import 'package:swipe_words/components/rounded_input_field.dart';
 import 'package:swipe_words/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:swipe_words/Screens/Home/home_screen.dart';
 
 class Body extends StatelessWidget {
   const Body({
@@ -39,7 +40,13 @@ class Body extends StatelessWidget {
             ),
             RoundedButton(
               text: "LOGIN",
-              press: () {},
+              press: () {
+                Navigator.push(context, 
+                MaterialPageRoute(builder: (context) {
+                  return HomeScreen();
+                },)
+                );
+              },
             ),
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(
