@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:swipe_words/Screens/Swipe/swipe_screen.dart';
 import 'package:swipe_words/constants.dart';
 
 class HomeScreen extends StatelessWidget {
-  final items = List<String>.generate(10000, (i) => 'Item $i');
+  final items = List<String>.generate(10, (i) => 'Item $i');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Swipe Cards"),
+        title: Text("Swipe Words"),
         backgroundColor: kPrimaryColor,
       ),
       body: SafeArea(
@@ -20,7 +21,14 @@ class HomeScreen extends StatelessWidget {
               child: InkWell(
                 splashColor: kPrimaryLightColor,
                 onTap: () {
-                  debugPrint('Card tapped.');
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return SwipeWords();
+                    },
+                  ),
+                );
                 },
                 child: Column(
                   children: [
