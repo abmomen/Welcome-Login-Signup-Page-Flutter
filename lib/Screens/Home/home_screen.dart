@@ -17,9 +17,41 @@ class HomeScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             return Card(
               elevation: 3,
-              child: ListTile(
-                title: Text(items[index]),
-                trailing: Icon(Icons.arrow_right),
+              child: Column(
+                children: [
+                  Container(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                      "Word List: " + (index + 1).toString(),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                      ),
+                    ),
+                    margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
+                    ),
+                  Container(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                      "7 Mastered out of 10",
+                      style: TextStyle(fontWeight: FontWeight.normal, fontSize: 18),
+                      ),
+                    ),
+                    margin: EdgeInsets.fromLTRB(16, 10, 16, 0)
+                    ),
+                  Container(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      child: LinearProgressIndicator(
+                        backgroundColor: kPrimaryLightColor,
+                        color: kPrimaryColor,
+                        value: 0.70,
+                        minHeight: 20,
+                      ),
+                    ),
+                    margin: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                  ),
+                ],
               ),
               margin: EdgeInsets.fromLTRB(16, 8, 16, 0),
               shape: OutlineInputBorder(
