@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return SwipeWords();
+                      return SwipeWords(title: "Swipe Words");
                     },
                   ),
                 );
