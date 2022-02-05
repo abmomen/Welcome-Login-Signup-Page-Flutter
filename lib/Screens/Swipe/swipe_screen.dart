@@ -98,9 +98,33 @@ class _MyHomePageState extends State<SwipeWords> {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 color: _swipeItems[index].content.color,
-                child: Text(
-                  _swipeItems[index].content.text,
-                  style: TextStyle(fontSize: 30),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Text("Abate",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 28),
+                        ),
+                        SizedBox(height: 8),
+                        Text("Become less intense or widespread. Remove or reduce law",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(fontSize: 22),
+                        ),
+                        SizedBox(height: 8),
+                        Text("The storm suddenly abated. This action would not have been sufficient to abate the odour nuisance",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        SizedBox(height: 8),
+                        Text("Subside, Lessen, Decrease, Diminish, Reduce, Ease",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               );
             },
