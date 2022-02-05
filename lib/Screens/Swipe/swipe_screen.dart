@@ -98,11 +98,14 @@ class _MyHomePageState extends State<SwipeWords> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  createNoButton(),
-                  createMasteredButton(),
-                  createYesButton()
+                  Expanded(child: createNoButton()),
+                  SizedBox(width: 16),
+                  Expanded(child: createMasteredButton()),
+                  SizedBox(width: 16),
+                  Expanded(child: createYesButton()),
                 ],
               ),
             ),
