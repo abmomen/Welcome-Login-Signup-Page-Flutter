@@ -60,57 +60,65 @@ class _MyHomePageState extends State<SwipeWords> {
           backgroundColor: kPrimaryColor,
         ),
         body: Container(
-            child: Column(children: [
-          Expanded(
-            flex: 8,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-              child: Container(
-                child: SwipeCards(
-                  matchEngine: _matchEngine,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      alignment: Alignment.center,
-                      color: _swipeItems[index].content.color,
-                      child: Text(
-                        _swipeItems[index].content.text,
-                        style: TextStyle(fontSize: 100),
-                      ),
-                    );
-                  },
-                  onStackFinished: () {
-                    _scaffoldKey.currentState.showSnackBar(SnackBar(
-                      content: Text("Stack Finished"),
-                      duration: Duration(milliseconds: 500),
-                    ));
-                  },
-                  itemChanged: (SwipeItem item, int index) {
-                    print("item: ${item.content.text}, index: $index");
-                  },
-                  upSwipeAllowed: true,
-                  fillSpace: true,
+            child: Column(children: [createCard(), createButtons()])));
+  }
+
+  Expanded createButtons() {
+    return Expanded(
+      flex: 2,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(child: createNoButton()),
+            SizedBox(width: 16),
+            Expanded(child: createMasteredButton()),
+            SizedBox(width: 16),
+            Expanded(child: createYesButton()),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Expanded createCard() {
+    return Expanded(
+      flex: 8,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+        child: Container(
+          child: SwipeCards(
+            matchEngine: _matchEngine,
+            itemBuilder: (BuildContext context, int index) {
+              return Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
-              ),
-            ),
+                color: _swipeItems[index].content.color,
+                child: Text(
+                  _swipeItems[index].content.text,
+                  style: TextStyle(fontSize: 30),
+                ),
+              );
+            },
+            onStackFinished: () {
+              _scaffoldKey.currentState.showSnackBar(SnackBar(
+                content: Text("Stack Finished"),
+                duration: Duration(milliseconds: 500),
+              ));
+            },
+            itemChanged: (SwipeItem item, int index) {
+              print("item: ${item.content.text}, index: $index");
+            },
+            upSwipeAllowed: true,
+            fillSpace: true,
           ),
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(child: createNoButton()),
-                  SizedBox(width: 16),
-                  Expanded(child: createMasteredButton()),
-                  SizedBox(width: 16),
-                  Expanded(child: createYesButton()),
-                ],
-              ),
-            ),
-          )
-        ])));
+        ),
+      ),
+    );
   }
 
   ElevatedButton createYesButton() {
