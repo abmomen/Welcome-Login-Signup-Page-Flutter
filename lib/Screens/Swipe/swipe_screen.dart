@@ -14,7 +14,7 @@ class SwipeWords extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<SwipeWords> {
-  List<SwipeItem> _swipeItems = List<SwipeItem>();
+  List<SwipeItem> _swipeItems = <SwipeItem>[];
   MatchEngine _matchEngine;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   List<String> _names = ["Red", "Blue", "Green", "Yellow", "Orange"];
@@ -64,7 +64,7 @@ class _MyHomePageState extends State<SwipeWords> {
           Expanded(
             flex: 8,
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
               child: Container(
                 child: SwipeCards(
                   matchEngine: _matchEngine,
@@ -94,62 +94,62 @@ class _MyHomePageState extends State<SwipeWords> {
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 24),
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton(
-                      style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(kPrimaryColor),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(16.0)))),
-                      onPressed: () {
-                        _matchEngine.currentItem.nope();
-                      },
-                      child: Text("Unknown")),
-                  ElevatedButton(
-                      style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(kPrimaryColor),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(16.0)))),
-                      onPressed: () {
-                        _matchEngine.currentItem.superLike();
-                      },
-                      child: Text("Mastered")),
-                  ElevatedButton(
-                      style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(kPrimaryColor),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(16.0)))),
-                      onPressed: () {
-                        _matchEngine.currentItem.like();
-                      },
-                      child: Text("Known"))
+                  createNoButton(),
+                  createMasteredButton(),
+                  createYesButton()
                 ],
               ),
             ),
           )
         ])));
+  }
+
+  ElevatedButton createYesButton() {
+    return ElevatedButton(
+        style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            backgroundColor: MaterialStateProperty.all<Color>(kPrimaryColor),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0)))),
+        onPressed: () {
+          _matchEngine.currentItem.like();
+        },
+        child: Text("Known"));
+  }
+
+  ElevatedButton createMasteredButton() {
+    return ElevatedButton(
+        style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            backgroundColor: MaterialStateProperty.all<Color>(kPrimaryColor),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0)))),
+        onPressed: () {
+          _matchEngine.currentItem.superLike();
+        },
+        child: Text("Mastered"));
+  }
+
+  ElevatedButton createNoButton() {
+    return ElevatedButton(
+        style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            backgroundColor: MaterialStateProperty.all<Color>(kPrimaryColor),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0)))),
+        onPressed: () {
+          _matchEngine.currentItem.nope();
+        },
+        child: Text("Unknown"));
   }
 }
 
