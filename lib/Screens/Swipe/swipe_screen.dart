@@ -14,49 +14,30 @@ class SwipeWords extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<SwipeWords> {
-  List<SwipeItem> _swipeItems = <SwipeItem>[];
+  List<SwipeItem> _swipeItems = List<SwipeItem>();
   MatchEngine _matchEngine;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-  List<String> _names = [
-    "Red",
-    "Blue",
-    "Green",
-    "Yellow",
-    "Orange",
-    "Grey",
-    "Purple",
-    "Pink"
-  ];
-  List<Color> _colors = [
-    Colors.red,
-    Colors.blue,
-    Colors.green,
-    Colors.yellow,
-    Colors.orange,
-    Colors.grey,
-    Colors.purple,
-    Colors.pink
-  ];
+  List<String> _names = ["Red", "Blue", "Green", "Yellow", "Orange"];
 
   @override
   void initState() {
     for (int i = 0; i < _names.length; i++) {
       _swipeItems.add(SwipeItem(
-          content: Content(text: _names[i], color: _colors[i]),
+          content: Content(text: _names[i], color: kPrimaryLightColor),
           likeAction: () {
-            _scaffoldKey.currentState?.showSnackBar(SnackBar(
+            _scaffoldKey.currentState.showSnackBar(SnackBar(
               content: Text("Liked ${_names[i]}"),
               duration: Duration(milliseconds: 500),
             ));
           },
           nopeAction: () {
-            _scaffoldKey.currentState?.showSnackBar(SnackBar(
+            _scaffoldKey.currentState.showSnackBar(SnackBar(
               content: Text("Nope ${_names[i]}"),
               duration: Duration(milliseconds: 500),
             ));
           },
           superlikeAction: () {
-            _scaffoldKey.currentState?.showSnackBar(SnackBar(
+            _scaffoldKey.currentState.showSnackBar(SnackBar(
               content: Text("Superliked ${_names[i]}"),
               duration: Duration(milliseconds: 500),
             ));
@@ -79,36 +60,92 @@ class _MyHomePageState extends State<SwipeWords> {
           backgroundColor: kPrimaryColor,
         ),
         body: Container(
-            margin: EdgeInsets.all(16),
             child: Column(children: [
-              Container(
-                height: 600,
-                child: SwipeCards(
-                  matchEngine: _matchEngine,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      alignment: Alignment.center,
-                      color: _swipeItems[index].content.color,
-                      child: Text(
-                        _swipeItems[index].content.text,
-                        style: TextStyle(fontSize: 100),
-                      ),
-                    );
-                  },
-                  onStackFinished: () {
-                    _scaffoldKey.currentState.showSnackBar(SnackBar(
-                      content: Text("Stack Finished"),
-                      duration: Duration(milliseconds: 500),
-                    ));
-                  },
-                  itemChanged: (SwipeItem item, int index) {
-                    print("item: ${item.content.text}, index: $index");
-                  },
-                  upSwipeAllowed: true,
-                  fillSpace: true,
-                ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.73,
+              child: SwipeCards(
+                matchEngine: _matchEngine,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    alignment: Alignment.center,
+                    color: _swipeItems[index].content.color,
+                    child: Text(
+                      _swipeItems[index].content.text,
+                      style: TextStyle(fontSize: 100),
+                    ),
+                  );
+                },
+                onStackFinished: () {
+                  _scaffoldKey.currentState.showSnackBar(SnackBar(
+                    content: Text("Stack Finished"),
+                    duration: Duration(milliseconds: 500),
+                  ));
+                },
+                itemChanged: (SwipeItem item, int index) {
+                  print("item: ${item.content.text}, index: $index");
+                },
+                upSwipeAllowed: true,
+                fillSpace: true,
               ),
-            ])));
+            ),
+          ),
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(kPrimaryColor),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(16.0)))),
+                    onPressed: () {
+                      _matchEngine.currentItem.nope();
+                    },
+                    child: Text("Unknown")),
+                ElevatedButton(
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(kPrimaryColor),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(16.0)))),
+                    onPressed: () {
+                      _matchEngine.currentItem.superLike();
+                    },
+                    child: Text("Mastered")),
+                ElevatedButton(
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(kPrimaryColor),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(16.0)))),
+                    onPressed: () {
+                      _matchEngine.currentItem.like();
+                    },
+                    child: Text("Known"))
+              ],
+            ),
+          )
+        ])));
   }
 }
 
