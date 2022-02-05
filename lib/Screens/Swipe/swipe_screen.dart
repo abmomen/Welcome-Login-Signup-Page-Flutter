@@ -61,88 +61,92 @@ class _MyHomePageState extends State<SwipeWords> {
         ),
         body: Container(
             child: Column(children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.73,
-              child: SwipeCards(
-                matchEngine: _matchEngine,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    alignment: Alignment.center,
-                    color: _swipeItems[index].content.color,
-                    child: Text(
-                      _swipeItems[index].content.text,
-                      style: TextStyle(fontSize: 100),
-                    ),
-                  );
-                },
-                onStackFinished: () {
-                  _scaffoldKey.currentState.showSnackBar(SnackBar(
-                    content: Text("Stack Finished"),
-                    duration: Duration(milliseconds: 500),
-                  ));
-                },
-                itemChanged: (SwipeItem item, int index) {
-                  print("item: ${item.content.text}, index: $index");
-                },
-                upSwipeAllowed: true,
-                fillSpace: true,
+          Expanded(
+            flex: 8,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Container(
+                child: SwipeCards(
+                  matchEngine: _matchEngine,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      alignment: Alignment.center,
+                      color: _swipeItems[index].content.color,
+                      child: Text(
+                        _swipeItems[index].content.text,
+                        style: TextStyle(fontSize: 100),
+                      ),
+                    );
+                  },
+                  onStackFinished: () {
+                    _scaffoldKey.currentState.showSnackBar(SnackBar(
+                      content: Text("Stack Finished"),
+                      duration: Duration(milliseconds: 500),
+                    ));
+                  },
+                  itemChanged: (SwipeItem item, int index) {
+                    print("item: ${item.content.text}, index: $index");
+                  },
+                  upSwipeAllowed: true,
+                  fillSpace: true,
+                ),
               ),
             ),
           ),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                    style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(kPrimaryColor),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(16.0)))),
-                    onPressed: () {
-                      _matchEngine.currentItem.nope();
-                    },
-                    child: Text("Unknown")),
-                ElevatedButton(
-                    style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(kPrimaryColor),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(16.0)))),
-                    onPressed: () {
-                      _matchEngine.currentItem.superLike();
-                    },
-                    child: Text("Mastered")),
-                ElevatedButton(
-                    style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(kPrimaryColor),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(16.0)))),
-                    onPressed: () {
-                      _matchEngine.currentItem.like();
-                    },
-                    child: Text("Known"))
-              ],
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(kPrimaryColor),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(16.0)))),
+                      onPressed: () {
+                        _matchEngine.currentItem.nope();
+                      },
+                      child: Text("Unknown")),
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(kPrimaryColor),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(16.0)))),
+                      onPressed: () {
+                        _matchEngine.currentItem.superLike();
+                      },
+                      child: Text("Mastered")),
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(kPrimaryColor),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(16.0)))),
+                      onPressed: () {
+                        _matchEngine.currentItem.like();
+                      },
+                      child: Text("Known"))
+                ],
+              ),
             ),
           )
         ])));
